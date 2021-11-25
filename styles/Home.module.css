@@ -1,5 +1,5 @@
 .container {
-  padding: 0 2rem;
+  padding: 0 20px;
 }
 
 .main {
@@ -66,11 +66,19 @@
 }
 
 .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  /* align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px; */
+}
+
+.flex {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
 }
 
 .card {
