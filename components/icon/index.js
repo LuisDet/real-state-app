@@ -88,3 +88,20 @@ export const Percentage = props => (
     <path d='M6 18 18 6' />
   </svg>
 )
+
+export const Book = props => (
+  <svg
+    className='icon icon-tabler icon-tabler-book'
+    width={24}
+    height={24}
+    strokeWidth={2}
+    stroke='currentColor'
+    fill='none'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    {...props}
+  >
+    <path d='M0 0h24v24H0z' stroke='none' />
+    <path d='M3 19a9 9 0 0 1 9 0 9 9 0 0 1 9 0M3 6a9 9 0 0 1 9 0 9 9 0 0 1 9 0M3 6v13M12 6v13M21 6v13' />
+  </svg>
+)

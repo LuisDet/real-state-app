@@ -1,8 +1,17 @@
 import Card from '../../components/card'
 import { Percentage, Builder, Date, Location } from '../../components/icon'
 import { TableRelation } from '../../components/table-relation'
+import { useState } from 'react'
+import { DialogDescription } from '../../components/dialog/DialogDescription'
 
 export default function Project() {
+  const [open, setOpen] = useState(false)
+
+  const handleMirror = e => {
+    if (e) e.preventDefault()
+    setOpen(!open)
+  }
+
   return (
     <>
       <section>
@@ -81,6 +90,8 @@ export default function Project() {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
               repellendus consequuntur officia quibusdam obcaecati tenetur id
               commodi quia deserunt voluptatem!
+              <button onClick={handleMirror}>Leer mas</button>
+              <DialogDescription isOpen={open} onIsOpen={handleMirror} />
             </p>
           </Card>
         </div>
@@ -102,6 +113,14 @@ export default function Project() {
           gap: 5px;
         }
         .card-text {
+          font-size: 14px;
+        }
+
+        .card-text button {
+          border: none;
+          background-color: transparent;
+          color: #06a0a2;
+          font-weight: 500;
           font-size: 14px;
         }
 
