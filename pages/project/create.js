@@ -1,107 +1,134 @@
-import Button from '../../components/ui/button';
-import { useRouter } from 'next/router';
-import useProjectContext from '../../hooks/useProjectContext';
-import { useRef } from 'react';
+import Button from '../../components/ui/button'
+import { useRouter } from 'next/router'
+import { Formik, Form, Field } from 'formik'
 
 export default function ProjectCreate() {
-  const router = useRouter();
-  const { createProject } = useProjectContext();
-  const nameRef = useRef('');
-  const builderRef = useRef('');
-  const locationRef = useRef('');
-  const comissionRef = useRef('');
-  const dateFromRef = useRef('');
-  const dateToRef = useRef('');
-  const commentRef = useRef('');
+  const router = useRouter()
 
-  const handleCancel = (e) => {
-    e.preventDefault();
-    router.back();
-  };
+  const handleCancel = e => {
+    e.preventDefault()
+    router.back()
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = value => {
+    window
+      .fetch('/api/project/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(value)
+      })
+      .then(respoonse => {
+        console.log(respoonse)
+        router.push('/project')
+      })
+  }
 
-    const newProject = {
-      name: nameRef.current.value,
-      builder: builderRef.current.value,
-      location: locationRef.current.value,
-      comission: comissionRef.current.value,
-      dateFrom: dateFromRef.current.value,
-      dateTo: dateToRef.current.value,
-      comment: commentRef.current.value
-    };
-
-    createProject(newProject);
-    router.push('/project');
-  };
   return (
     <section>
       <h2>Crear Proyecto</h2>
-      <form onSubmit={handleSubmit}>
-        <div className='form-control'>
-          <label htmlFor='name'>Nombre</label>
-          <input type='text' id='name' className='form-input' ref={nameRef} />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='builder'>Constructora</label>
-          <input
-            type='text'
-            id='builder'
-            className='form-input'
-            ref={builderRef}
-          />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='location'>Ubicacion</label>
-          <input
-            type='text'
-            id='location'
-            className='form-input'
-            ref={locationRef}
-          />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='commision'>Comision</label>
-          <input
-            type='text'
-            id='commision'
-            className='form-input'
-            ref={comissionRef}
-          />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='date-from'>Desde</label>
-          <input
-            type='date'
-            id='date-from'
-            className='form-input'
-            ref={dateFromRef}
-          />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='date-to'>Hasta</label>
-          <input
-            type='date'
-            id='date-to'
-            className='form-input'
-            ref={dateToRef}
-          />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='comentary'>Descripcion</label>
-          <textarea
-            id='comentary'
-            rows='4'
-            className='form-input'
-            ref={commentRef}
-          />
-        </div>
-        <Button style='primary'>Guardar</Button>
-        <Button onClick={handleCancel} style='cancel'>
-          Cancelar
-        </Button>
-      </form>
+      <Formik
+        initialValues={{ name: '', builder: '', location: '', comission: '' }}
+        onSubmit={handleSubmit}
+      >
+        {({}) => (
+          <Form>
+            <div className='form-control'>
+              <label htmlFor='builder'>Nombre</label>
+              <Field
+                type='name'
+                name='name'
+                render={({ field }) => (
+                  <input {...field} className='form-input' />
+                )}
+              />
+            </div>
+            <div className='form-control'>
+              <label htmlFor='builder'>Comision</label>
+              <Field
+                type='comission'
+                name='comission'
+                render={({ field }) => (
+                  <input {...field} className='form-input' />
+                )}
+              />
+            </div>
+            <div className='form-control'>
+              <label htmlFor='comentary'>Descripcion</label>
+              <Field
+                type='comentary'
+                name='comentary'
+                render={({ field }) => (
+                  <textarea {...field} rows='4' className='form-input' />
+                )}
+              />
+            </div>
+            <Button style='primary'>Guardar</Button>
+            <Button onClick={handleCancel} style='cancel'>
+              Cancelar
+            </Button>
+            {/* <div className='form-control'>
+        <label htmlFor='name'>Nombre</label>
+        <input type='text' id='name' className='form-input' ref={nameRef} />
+      </div>
+      <div className='form-control'>
+        <label htmlFor='builder'>Constructora</label>
+        <input
+          type='text'
+          id='builder'
+          className='form-input'
+          ref={builderRef}
+        />
+      </div>
+      <div className='form-control'>
+        <label htmlFor='location'>Ubicacion</label>
+        <input
+          type='text'
+          id='location'
+          className='form-input'
+          ref={locationRef}
+        />
+      </div>
+      <div className='form-control'>
+        <label htmlFor='commision'>Comision</label>
+        <input
+          type='text'
+          id='commision'
+          className='form-input'
+          ref={comissionRef}
+        />
+      </div>
+      <div className='form-control'>
+        <label htmlFor='date-from'>Desde</label>
+        <input
+          type='date'
+          id='date-from'
+          className='form-input'
+          ref={dateFromRef}
+        />
+      </div>
+      <div className='form-control'>
+        <label htmlFor='date-to'>Hasta</label>
+        <input
+          type='date'
+          id='date-to'
+          className='form-input'
+          ref={dateToRef}
+        />
+      </div>
+      <div className='form-control'>
+        <label htmlFor='comentary'>Descripcion</label>
+        <textarea
+          id='comentary'
+          rows='4'
+          className='form-input'
+          ref={commentRef}
+        />
+      </div> */}
+          </Form>
+        )}
+      </Formik>
 
       <style jsx>{`
         h2 {
@@ -135,5 +162,5 @@ export default function ProjectCreate() {
         }
       `}</style>
     </section>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-import '../styles/globals.css';
-import NavBar from '../components/header/nav-bar';
-import ContextProvider from '../context';
-import HomeIcon from '../components/icon/home';
-import MarketIcon from '../components/icon/shop';
-import BarsIcon from '../components/icon/bars';
-import Link from 'next/link';
+import '../styles/globals.css'
+import NavBar from '../components/header/nav-bar'
+import ContextProvider from '../context'
+import HomeIcon from '../components/icon/home'
+import MarketIcon from '../components/icon/shop'
+import BarsIcon from '../components/icon/bars'
+import Link from 'next/link'
 
 function MyApp({ Component, pageProps }) {
-  const componentName = { Component }.Component.name.toLowerCase();
+  const componentName = { Component }.Component.name.toLowerCase()
   return (
     <div className='page-container'>
       {componentName === 'home' || componentName === 'projectcreate' ? (
@@ -16,7 +16,9 @@ function MyApp({ Component, pageProps }) {
         <NavBar />
       )}
       <ContextProvider>
-        <Component {...pageProps} />
+        <main>
+          <Component {...pageProps} />
+        </main>
       </ContextProvider>
       <div className='footer-bar'>
         <Link href='/'>
@@ -46,7 +48,7 @@ function MyApp({ Component, pageProps }) {
         `}</style>
       </div>
     </div>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp

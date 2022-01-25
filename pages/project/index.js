@@ -1,5 +1,5 @@
-import HeadArticle from '../../components/head-articule';
-import ProjectList from '../../components/project-list';
+import HeadArticle from '../../components/head-articule'
+import ProjectList from '../../components/project-list'
 
 export default function Projects() {
   return (
@@ -7,5 +7,5 @@ export default function Projects() {
       <HeadArticle title='Projectos' link='/project/create' />
       <ProjectList />
     </section>
-  );
+  )
 }
