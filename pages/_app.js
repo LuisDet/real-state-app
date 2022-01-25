@@ -3,7 +3,7 @@ import NavBar from '../components/header/nav-bar'
 import ContextProvider from '../context'
 import HomeIcon from '../components/icon/home'
 import MarketIcon from '../components/icon/shop'
-import BarsIcon from '../components/icon/bars'
+import { Bars as BarsIcon } from '../components/icon'
 import Link from 'next/link'
 
 function MyApp({ Component, pageProps }) {
